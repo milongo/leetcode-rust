@@ -12,3 +12,8 @@ The purpose of this repository is twofold:
 
 - Solutions are implemented in Rust and are named according to the problem's title on LeetCode.
 - Basic tests for each solution are implemented as a way to verify the solution.
+
+## Usage
+
+To use this repository, you must have Rust installed. See [rust installation instructions](https://doc.rust-lang.org/book/ch01-01-installation.html).
+To run the tests, execute `cargo test`.
