@@ -9,13 +9,6 @@
 /// # Returns
 /// 
 /// True if target can be obtained by adding three numbers in the array, false otherwise.
-/// 
-/// # Examples
-/// 
-/// ```
-/// let result = three_sum_bool(vec![2, 7, 11, 15], 9);
-/// assert_eq!(result, true]);
-/// ```
 pub fn three_sum_bool(nums: Vec<i32>, target: i32) -> bool {
     let mut nums = nums;
     nums.sort();
