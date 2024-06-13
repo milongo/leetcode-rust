@@ -1,10 +1,11 @@
 mod problems;
 
-use problems::two_sum::{self};
+// use problems::two_sum::{self};
 
+use problems::three_sum::{self};
 fn main() {
-    let nums = vec![2, 7, 11, 15];
-    let target = 9;
-    let result = two_sum::two_sum(nums, target);
-    println!("Result for Problem 1 (two_sum): {:?}", result);
+    let nums = vec![1, 7, 9, 3, 4];
+    let target = 30;
+    let result = three_sum::three_sum(nums, target);
+    println!("Result for Problem: {:?}", result);
 }
