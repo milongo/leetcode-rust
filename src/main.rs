@@ -1,11 +1,9 @@
 mod problems;
 
-// use problems::two_sum::{self};
-use problems::three_sum::{self};
+use problems::longest_substring::{self};
 
 fn main() {
-    let nums = vec![1, 7, 9, 3, 4];
-    let target = 30;
-    let result = three_sum::three_sum_bool(nums, target);
+    let string = String::from("abcdabca");
+    let result = longest_substring::length_of_longest_substring(string);
     println!("Result for Problem: {:?}", result);
 }
