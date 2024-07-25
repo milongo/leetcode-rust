@@ -13,6 +13,24 @@ use std::collections::HashSet;
 /// # Returns
 ///
 /// The length of the longest substring without repeated characters.
+/// # Examples
+/// ```
+/// use std::assert_eq;
+/// use leetcode_rust::problems::longest_substring::length_of_longest_substring;
+/// let string = String::from("abcdabca");
+/// assert_eq!(length_of_longest_substring(string), 4);
+/// ```
+///
+/// # Notes
+///
+/// The function is case-sensitive, meaning that 'A' and 'a' are considered different characters.
+///
+/// ```
+/// use std::assert_eq;
+/// use leetcode_rust::problems::longest_substring::length_of_longest_substring;
+/// let string = String::from("abcABC");
+/// assert_eq!(length_of_longest_substring(string), 6);
+/// ```
 pub fn length_of_longest_substring(s: String) -> i32 {
     let mut longest_substring: i32 = 0;
     let mut start = 0;
