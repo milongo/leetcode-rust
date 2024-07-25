@@ -1,4 +1,4 @@
-use rust::problems::two_sum;
+use leetcode_rust::problems::two_sum;
 
 #[test]
 fn test_two_sum_example() {

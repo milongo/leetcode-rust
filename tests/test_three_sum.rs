@@ -1,4 +1,4 @@
-use rust::problems::three_sum::{self, three_sum_bool};
+use leetcode_rust::problems::three_sum::{self, three_sum_bool};
 
 #[test]
 fn test_three_sum_example_1() {
