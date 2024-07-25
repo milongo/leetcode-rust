@@ -1,13 +1,13 @@
 /// Variant of LeetCode problem 15.
 /// Determines whether any three numbers in an array can be added to a target number.
 /// O(n**2) time complexity.
-/// 
+///
 /// # Arguments
 /// * `nums` - A vector of integers.
 /// * `target` - The target sum.
-/// 
+///
 /// # Returns
-/// 
+///
 /// True if target can be obtained by adding three numbers in the array, false otherwise.
 pub fn three_sum_bool(nums: Vec<i32>, target: i32) -> bool {
     let mut nums = nums;
@@ -36,5 +36,5 @@ pub fn three_sum_bool(nums: Vec<i32>, target: i32) -> bool {
         }
     }
 
-    return false
+    return false;
 }
