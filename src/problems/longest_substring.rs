@@ -1,6 +1,18 @@
 use std::cmp::max;
 use std::collections::HashSet;
 
+/// LeetCode problem 3.
+/// Computes the length of the longest substring without repeated characters. 
+/// O(n) time complexity.
+/// O(n) space complexity.
+/// 
+/// # Arguments
+/// 
+/// * `s` - A string.
+/// 
+/// # Returns
+/// 
+/// The length of the longest substring without repeated characters. 
 pub fn length_of_longest_substring(s: String) -> i32 {
     
     let mut longest_substring:i32 = 0;
