@@ -1,8 +1,7 @@
 use std::cmp::max;
 use std::cmp::min;
-use std::collections::HashSet;
 use std::collections::HashMap;
-
+use std::collections::HashSet;
 
 /// LeetCode problem 121.
 /// Returns the maximum profit one can obtain by buying and selling stock.
@@ -29,8 +28,6 @@ pub fn max_profit(prices: Vec<i32>) -> i32 {
     }
     return max_profit;
 }
-
-
 
 /// LeetCode problem 3.
 /// Computes the length of the longest substring without repeated characters.
@@ -80,8 +77,6 @@ pub fn length_of_longest_substring(s: String) -> i32 {
     }
     longest_substring
 }
-
-
 
 /// LeetCode Problem 1.
 /// Finds two numbers in the given list that add up to the target value.
