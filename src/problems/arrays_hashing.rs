@@ -146,3 +146,42 @@ pub fn three_sum_bool(nums: Vec<i32>, target: i32) -> bool {
 
     return false;
 }
+
+/// LeetCode problem 217
+/// Determines whether array has duplicates.
+/// O(n) time complexity
+/// O(n) space complexity
+///
+/// # Arguments
+///
+/// * `nums` - A vector of integers.
+///
+/// # Returns
+/// True if any value appears at least twice in the array, false if every element is distinct.
+///
+/// # Examples
+/// ```
+/// use std::collections::HashSet;
+/// use leetcode_rust::problems::arrays_hashing::has_duplicate;
+/// let nums = vec![1, 2, 3, 4, 5];
+/// assert_eq!(has_duplicate(nums), false);
+/// ```
+///
+/// ```
+/// use std::collections::HashSet;
+/// use leetcode_rust::problems::arrays_hashing::has_duplicate;
+/// let nums = vec![1, 2, 3, 3, 5];
+/// assert_eq!(has_duplicate(nums), true);
+/// ```
+pub fn has_duplicate(nums: Vec<i32>) -> bool {
+    let mut seen: HashSet<i32> = HashSet::new();
+
+    for i in 0..nums.len() {
+        if seen.contains(&nums[i]) {
+            return true;
+        } else {
+            seen.insert(nums[i]);
+        }
+    }
+    return false;
+}
