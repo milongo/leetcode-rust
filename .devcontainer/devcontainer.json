@@ -9,8 +9,15 @@
 			"extensions": [
 				"rust-lang.rust-analyzer",
 				"vadimcn.vscode-lldb"
-			]
+			],
+			"settings": {
+				"[rust]": {
+					"editor.defaultFormatter": "rust-lang.rust-analyzer",
+					"editor.formatOnSave": true
+				}
+			}
 		}
+		
 	}
 	
 	// Use 'mounts' to make the cargo cache persistent in a Docker Volume.

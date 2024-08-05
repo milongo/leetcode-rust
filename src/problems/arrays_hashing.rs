@@ -185,3 +185,51 @@ pub fn has_duplicate(nums: Vec<i32>) -> bool {
     }
     return false;
 }
+
+/// Determines if two strings are anagrams of each other.
+/// O(n) time complexity
+/// O(n) space complexity
+///
+/// # Arguments
+///
+/// * `s` - A string.
+/// * `t` - A string.
+///
+/// # Returns
+/// True if `s` and `t` are anagrams, false otherwise.
+///
+/// # Examples
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::is_anagram;
+/// let s = "anagram".to_string();
+/// let t = "nagaram".to_string();
+/// assert_eq!(is_anagram(s, t), true);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::is_anagram;
+/// let s = "rat".to_string();
+/// let t = "car".to_string();
+/// assert_eq!(is_anagram(s, t), false);
+/// ```
+pub fn is_anagram(s: String, t: String) -> bool {
+    if s.len() != t.len() {
+        return false;
+    }
+
+    let mut counts = HashMap::new();
+
+    for ch in s.chars() {
+        *counts.entry(ch).or_insert(0) += 1;
+    }
+
+    for ch in t.chars() {
+        let count = counts.entry(ch).or_insert(0);
+        if *count == 0 {
+            return false;
+        }
+        *count -= 1;
+    }
+
+    counts.values().all(|&count| count == 0)
+}
