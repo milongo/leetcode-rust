@@ -233,3 +233,54 @@ pub fn is_anagram(s: String, t: String) -> bool {
 
     counts.values().all(|&count| count == 0)
 }
+
+/// Checks if a given string is a palindrome, considering only alphanumeric characters
+/// and ignoring case.
+/// 
+/// This function runs in **O(n)** time complexity and **O(n)** space complexity.
+/// 
+/// # Arguments
+/// 
+/// * `s` - A `String` containing the input text.
+/// 
+/// # Returns
+/// 
+/// Returns `true` if `s` is a palindrome, otherwise returns `false`.
+/// 
+/// # Examples
+/// 
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::is_palindrome;
+/// 
+/// let s = "A man, a plan, a canal: Panama".to_string();
+/// assert_eq!(is_palindrome(s), true);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::is_palindrome;
+/// 
+/// let s = "race a car".to_string();
+/// assert_eq!(is_palindrome(s), false);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::is_palindrome;
+/// 
+/// let s = " ".to_string(); // Empty or whitespace-only strings are palindromes.
+/// assert_eq!(is_palindrome(s), true);
+/// ```
+pub fn is_palindrome(s: String) -> bool {
+    
+    let mut s_alphanums = String::new();
+    for c in s.chars() {
+        if c.is_alphanumeric(){
+            s_alphanums.push(c.to_ascii_lowercase());
+        }
+    }
+    let mut s_reverse = String::new();
+    for c in s_alphanums.chars().rev() {
+        s_reverse.push(c);
+    }
+
+    return s_alphanums == s_reverse;
+}
