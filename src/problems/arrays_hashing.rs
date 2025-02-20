@@ -147,7 +147,7 @@ pub fn three_sum_bool(nums: Vec<i32>, target: i32) -> bool {
     return false;
 }
 
-/// LeetCode problem 217
+/// LeetCode problem 217.
 /// Determines whether array has duplicates.
 /// O(n) time complexity
 /// O(n) space complexity
@@ -186,6 +186,7 @@ pub fn has_duplicate(nums: Vec<i32>) -> bool {
     return false;
 }
 
+/// LeetCode problem 242.
 /// Determines if two strings are anagrams of each other.
 /// O(n) time complexity
 /// O(n) space complexity
@@ -234,6 +235,7 @@ pub fn is_anagram(s: String, t: String) -> bool {
     counts.values().all(|&count| count == 0)
 }
 
+/// LeetCode problem 125.
 /// Checks if a given string is a palindrome, considering only alphanumeric characters
 /// and ignoring case.
 /// 
@@ -283,4 +285,63 @@ pub fn is_palindrome(s: String) -> bool {
     }
 
     return s_alphanums == s_reverse;
+}
+
+/// LeetCode problem 704.
+/// Implements binary search to find the target value in a sorted array.
+/// 
+/// This function runs in **O(log n)** time complexity and **O(1)** space complexity.
+/// 
+/// # Arguments
+/// 
+/// * `nums` - A `Vec<i32>` representing a sorted list of integers.
+/// * `target` - An `i32` representing the value to search for.
+/// 
+/// # Returns
+/// 
+/// Returns the index of `target` if found in `nums`, otherwise returns `-1`.
+/// 
+/// # Examples
+/// 
+/// ```
+/// use leetcode_rust::problems::binary_search::search;
+/// 
+/// let nums = vec![-1, 0, 3, 5, 9, 12];
+/// let target = 9;
+/// assert_eq!(search(nums, target), 4);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::binary_search::search;
+/// 
+/// let nums = vec![-1, 0, 3, 5, 9, 12];
+/// let target = 2;
+/// assert_eq!(search(nums, target), -1);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::binary_search::search;
+/// 
+/// let nums = vec![5];
+/// let target = 5;
+/// assert_eq!(search(nums, target), 0);
+/// ```
+///
+///
+pub fn search(nums: Vec<i32>, target: i32) -> i32 {
+    let mut left: i32 = 0;
+    let mut right: i32 = nums.len() as i32 - 1; // Use i32 to avoid underflow issues
+
+    while left <= right {
+        let middle = left + (right - left) / 2; // Safe midpoint calculation
+
+        if nums[middle as usize] == target {
+            return middle;
+        } else if nums[middle as usize] < target {
+            left = middle + 1;
+        } else {
+            right = middle - 1;
+        }
+    }
+    -1
 }
