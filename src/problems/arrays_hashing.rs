@@ -238,44 +238,43 @@ pub fn is_anagram(s: String, t: String) -> bool {
 /// LeetCode problem 125.
 /// Checks if a given string is a palindrome, considering only alphanumeric characters
 /// and ignoring case.
-/// 
+///
 /// This function runs in **O(n)** time complexity and **O(n)** space complexity.
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `s` - A `String` containing the input text.
-/// 
+///
 /// # Returns
-/// 
+///
 /// Returns `true` if `s` is a palindrome, otherwise returns `false`.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```
 /// use leetcode_rust::problems::arrays_hashing::is_palindrome;
-/// 
+///
 /// let s = "A man, a plan, a canal: Panama".to_string();
 /// assert_eq!(is_palindrome(s), true);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::arrays_hashing::is_palindrome;
-/// 
+///
 /// let s = "race a car".to_string();
 /// assert_eq!(is_palindrome(s), false);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::arrays_hashing::is_palindrome;
-/// 
+///
 /// let s = " ".to_string(); // Empty or whitespace-only strings are palindromes.
 /// assert_eq!(is_palindrome(s), true);
 /// ```
 pub fn is_palindrome(s: String) -> bool {
-    
     let mut s_alphanums = String::new();
     for c in s.chars() {
-        if c.is_alphanumeric(){
+        if c.is_alphanumeric() {
             s_alphanums.push(c.to_ascii_lowercase());
         }
     }
@@ -289,23 +288,23 @@ pub fn is_palindrome(s: String) -> bool {
 
 /// LeetCode problem 704.
 /// Implements binary search to find the target value in a sorted array.
-/// 
+///
 /// This function runs in **O(log n)** time complexity and **O(1)** space complexity.
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `nums` - A `Vec<i32>` representing a sorted list of integers.
 /// * `target` - An `i32` representing the value to search for.
-/// 
+///
 /// # Returns
-/// 
+///
 /// Returns the index of `target` if found in `nums`, otherwise returns `-1`.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```
 /// use leetcode_rust::problems::binary_search::search;
-/// 
+///
 /// let nums = vec![-1, 0, 3, 5, 9, 12];
 /// let target = 9;
 /// assert_eq!(search(nums, target), 4);
@@ -313,7 +312,7 @@ pub fn is_palindrome(s: String) -> bool {
 ///
 /// ```
 /// use leetcode_rust::problems::binary_search::search;
-/// 
+///
 /// let nums = vec![-1, 0, 3, 5, 9, 12];
 /// let target = 2;
 /// assert_eq!(search(nums, target), -1);
@@ -321,7 +320,7 @@ pub fn is_palindrome(s: String) -> bool {
 ///
 /// ```
 /// use leetcode_rust::problems::binary_search::search;
-/// 
+///
 /// let nums = vec![5];
 /// let target = 5;
 /// assert_eq!(search(nums, target), 0);
@@ -348,69 +347,67 @@ pub fn search(nums: Vec<i32>, target: i32) -> i32 {
 
 /// LeetCode problem 20.
 /// Determines if a string of parentheses, brackets, and braces is valid.
-/// 
+///
 /// A string is considered **valid** if:
 /// - Open brackets must be closed by the same type of brackets.
 /// - Open brackets must be closed in the correct order.
 /// - Every close bracket has a corresponding open bracket of the same type.
-/// 
+///
 /// # Arguments
-/// 
+///
 /// * `s` - A `String` containing only the characters `()[]{}`.
-/// 
+///
 /// # Returns
-/// 
+///
 /// Returns `true` if `s` is a valid sequence of brackets, otherwise returns `false`.
-/// 
+///
 /// # Complexity
-/// 
+///
 /// - **Time Complexity:** O(n) – Each character is processed once.
 /// - **Space Complexity:** O(n) – In the worst case, the stack stores all characters.
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```
 /// use leetcode_rust::problems::stack::is_valid;
-/// 
+///
 /// let s = "()".to_string();
 /// assert_eq!(is_valid(s), true);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::stack::is_valid;
-/// 
+///
 /// let s = "()[]{}".to_string();
 /// assert_eq!(is_valid(s), true);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::stack::is_valid;
-/// 
+///
 /// let s = "(]".to_string();
 /// assert_eq!(is_valid(s), false);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::stack::is_valid;
-/// 
+///
 /// let s = "([)]".to_string();
 /// assert_eq!(is_valid(s), false);
 /// ```
 ///
 /// ```
 /// use leetcode_rust::problems::stack::is_valid;
-/// 
+///
 /// let s = "{[]}".to_string();
 /// assert_eq!(is_valid(s), true);
 /// ```
 pub fn is_valid(s: String) -> bool {
-    
     let mut stack = Vec::new();
     let mut map = HashMap::new();
     map.insert(')', '(');
     map.insert(']', '[');
     map.insert('}', '{');
-
 
     for char in s.chars() {
         if map.contains_key(&char) {
@@ -419,8 +416,7 @@ pub fn is_valid(s: String) -> bool {
             } else {
                 return false;
             }
-        }
-        else {
+        } else {
             stack.push(char);
         }
     }
