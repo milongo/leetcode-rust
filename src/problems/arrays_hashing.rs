@@ -345,3 +345,84 @@ pub fn search(nums: Vec<i32>, target: i32) -> i32 {
     }
     -1
 }
+
+/// LeetCode problem 20.
+/// Determines if a string of parentheses, brackets, and braces is valid.
+/// 
+/// A string is considered **valid** if:
+/// - Open brackets must be closed by the same type of brackets.
+/// - Open brackets must be closed in the correct order.
+/// - Every close bracket has a corresponding open bracket of the same type.
+/// 
+/// # Arguments
+/// 
+/// * `s` - A `String` containing only the characters `()[]{}`.
+/// 
+/// # Returns
+/// 
+/// Returns `true` if `s` is a valid sequence of brackets, otherwise returns `false`.
+/// 
+/// # Complexity
+/// 
+/// - **Time Complexity:** O(n) – Each character is processed once.
+/// - **Space Complexity:** O(n) – In the worst case, the stack stores all characters.
+/// 
+/// # Examples
+/// 
+/// ```
+/// use leetcode_rust::problems::stack::is_valid;
+/// 
+/// let s = "()".to_string();
+/// assert_eq!(is_valid(s), true);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::stack::is_valid;
+/// 
+/// let s = "()[]{}".to_string();
+/// assert_eq!(is_valid(s), true);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::stack::is_valid;
+/// 
+/// let s = "(]".to_string();
+/// assert_eq!(is_valid(s), false);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::stack::is_valid;
+/// 
+/// let s = "([)]".to_string();
+/// assert_eq!(is_valid(s), false);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::stack::is_valid;
+/// 
+/// let s = "{[]}".to_string();
+/// assert_eq!(is_valid(s), true);
+/// ```
+pub fn is_valid(s: String) -> bool {
+    
+    let mut stack = Vec::new();
+    let mut map = HashMap::new();
+    map.insert(')', '(');
+    map.insert(']', '[');
+    map.insert('}', '{');
+
+
+    for char in s.chars() {
+        if map.contains_key(&char) {
+            if stack.len() > 0 && stack[stack.len() - 1] == map[&char] {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        else {
+            stack.push(char);
+        }
+    }
+    return stack.len() == 0;
+}
