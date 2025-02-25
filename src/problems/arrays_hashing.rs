@@ -422,3 +422,90 @@ pub fn is_valid(s: String) -> bool {
     }
     return stack.len() == 0;
 }
+
+/// LeetCode problem 733.
+/// Performs a flood fill on a 2D grid, changing all connected pixels of the same color to a new color.
+///
+/// This function implements an **iterative DFS (Depth-First Search)** using a stack to avoid recursion depth issues.
+/// It modifies all adjacent pixels that share the same color as the starting pixel.
+///
+/// # Arguments
+///
+/// * `image` - A 2D vector (`Vec<Vec<i32>>`) representing the grid of pixel colors.
+/// * `sr` - The row index of the starting pixel.
+/// * `sc` - The column index of the starting pixel.
+/// * `color` - The new color to apply to the connected region.
+///
+/// # Returns
+///
+/// A modified 2D vector (`Vec<Vec<i32>>`) where all pixels connected to `(sr, sc)` with the same original color
+/// have been changed to `color`.
+///
+/// # Constraints
+///
+/// - The image dimensions are `m x n`, where `1 <= m, n <= 50`.
+/// - The color values are non-negative integers.
+/// - The starting pixel `(sr, sc)` is always within the image bounds.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(m × n) in the worst case, where all pixels are the same color and need to be changed.
+/// - **Space Complexity:** O(m × n) in the worst case due to the stack storing all pixels.
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::graph::flood_fill;
+///
+/// let image = vec![
+///     vec![1, 1, 1],
+///     vec![1, 1, 0],
+///     vec![1, 0, 1]
+/// ];
+/// let sr = 1;
+/// let sc = 1;
+/// let new_color = 2;
+/// let expected = vec![
+///     vec![2, 2, 2],
+///
+pub fn flood_fill(image: Vec<Vec<i32>>, sr: i32, sc: i32, color: i32) -> Vec<Vec<i32>> {
+    let starting_color = image[sr as usize][sc as usize];
+    if color == starting_color {
+        return image;
+    }
+    let mut coord_stack = Vec::new();
+    coord_stack.push((sr, sc));
+    let mut new_image = image.clone();
+    let rows = image.len() as i32;
+    let cols = image[0].len() as i32;
+    while coord_stack.len() > 0 {
+        if let Some(coords) = coord_stack.pop() {
+            let x = coords.0;
+            let y = coords.1;
+            if new_image[x as usize][y as usize] == starting_color {
+                new_image[x as usize][y as usize] = color;
+            }
+            if x + 1 <= rows - 1 {
+                if new_image[x as usize + 1][y as usize] == starting_color {
+                    coord_stack.push((x + 1, y))
+                }
+            }
+            if x - 1 >= 0 {
+                if new_image[x as usize - 1][y as usize] == starting_color {
+                    coord_stack.push((x - 1, y))
+                }
+            }
+            if y + 1 <= cols - 1 {
+                if new_image[x as usize][y as usize + 1] == starting_color {
+                    coord_stack.push((x, y + 1))
+                }
+            }
+            if y - 1 >= 0 {
+                if new_image[x as usize][y as usize - 1] == starting_color {
+                    coord_stack.push((x, y - 1))
+                }
+            }
+        }
+    }
+    new_image
+}
