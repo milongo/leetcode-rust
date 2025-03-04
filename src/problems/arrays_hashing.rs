@@ -2,6 +2,7 @@ use std::cmp::max;
 use std::cmp::min;
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::hash::Hash;
 
 /// LeetCode problem 121.
 /// Returns the maximum profit one can obtain by buying and selling stock.
@@ -508,4 +509,66 @@ pub fn flood_fill(image: Vec<Vec<i32>>, sr: i32, sc: i32, color: i32) -> Vec<Vec
         }
     }
     new_image
+}
+
+/// LeetCode problem 383
+/// Determines whether a ransom note can be constructed using letters from a magazine.
+///
+/// This function checks if the `ransom_note` string can be formed using the characters
+/// available in `magazine`. Each character in `magazine` can only be used once.
+///
+/// # Arguments
+///
+/// * `ransom_note` - A `String` containing the text of the ransom note.
+/// * `magazine` - A `String` containing the available characters.
+///
+/// # Returns
+///
+/// Returns `true` if `ransom_note` can be constructed using characters from `magazine`,
+/// otherwise returns `false`.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n + m), where `n` is the length of `ransom_note` and `m` is the length of `magazine`.
+/// - **Space Complexity:** O(m), since we store character counts from `magazine` in a `HashMap`.
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::can_construct;
+///
+/// let ransom_note = "a".to_string();
+/// let magazine = "b".to_string();
+/// assert_eq!(can_construct(ransom_note, magazine), false);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::can_construct;
+///
+/// let ransom_note = "aa".to_string();
+/// let magazine = "ab".to_string();
+/// assert_eq!(can_construct(ransom_note, magazine), false);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::can_construct;
+///
+/// let ransom_note = "aa".to_string();
+/// let magazine = "aab".to_string();
+/// assert_eq!(can_construct(ransom_note, magazine), true);
+/// ```
+pub fn can_construct(ransom_note: String, magazine: String) -> bool {
+    let mut mag_count: HashMap<char, i32> = HashMap::new();
+    for char in magazine.chars() {
+        *mag_count.entry(char).or_default() += 1;
+    }
+
+    for char in ransom_note.chars() {
+        let count = mag_count.entry(char).or_default();
+        if *count == 0 {
+            return false;
+        }
+        *count -= 1;
+    }
+    true
 }
