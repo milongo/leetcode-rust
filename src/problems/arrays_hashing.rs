@@ -572,3 +572,73 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
     }
     true
 }
+/// LeetCode problem 409.
+/// Computes the length of the longest palindrome that can be built using the characters in `s`.
+///
+/// A palindrome is a word or phrase that reads the same forward and backward.
+/// This function determines the maximum possible length of a palindrome that can
+/// be formed using the letter frequencies in `s`.
+///
+/// # Arguments
+///
+/// * `s` - A `String` containing lowercase and/or uppercase letters.
+///
+/// # Returns
+///
+/// Returns an `i32` representing the longest possible palindrome length.
+///
+/// # Approach
+///
+/// - Count the frequency of each character using a `HashMap<char, i32>`.
+/// - Add **all even frequencies** to the palindrome length.
+/// - Add **largest possible odd frequencies** by subtracting 1 (since one letter remains unused).
+/// - If there's at least one odd-frequency character, **one odd character can be placed in the center**.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n), where `n` is the length of `s`, since we iterate over `s` and the frequency map once.
+/// - **Space Complexity:** O(1), since the `HashMap` holds at most 52 entries (for lowercase + uppercase letters).
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::longest_palindrome;
+///
+/// let s = "abccccdd".to_string();
+/// assert_eq!(longest_palindrome(s), 7); // "dccaccd" is the longest palindrome
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::longest_palindrome;
+///
+/// let s = "a".to_string();
+/// assert_eq!(longest_palindrome(s), 1); // "a" is already a palindrome
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::hashmap::longest_palindrome;
+///
+/// let s = "bananas".to_string();
+/// assert_eq!(longest_palindrome(s), 5); // "nanan" or "anana"
+/// ```
+pub fn longest_palindrome(s: String) -> i32 {
+    let mut char_count = HashMap::new();
+    for char in s.chars() {
+        *char_count.entry(char).or_default() += 1;
+    }
+
+    let mut longest_length = 0;
+    let mut has_odd_freq = false;
+    for (key, val) in char_count.iter() {
+        if val % 2 == 0 {
+            longest_length += 2;
+        } else {
+            has_odd_freq = true;
+            longest_length += val - 1;
+        }
+    }
+    if has_odd_freq {
+        longest_length += 1;
+    }
+    longest_length
+}
