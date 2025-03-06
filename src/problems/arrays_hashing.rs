@@ -642,3 +642,63 @@ pub fn longest_palindrome(s: String) -> i32 {
     }
     longest_length
 }
+
+/// Finds the majority element in a vector using the **Boyer-Moore Voting Algorithm**.
+///
+/// The majority element is the element that appears more than `⌊n / 2⌋` times in the array.
+/// This function assumes that such an element **always exists**, as per the problem constraints.
+///
+/// # Arguments
+///
+/// * `nums` - A vector of integers (`Vec<i32>`) containing the input numbers.
+///
+/// # Returns
+///
+/// Returns the integer that is the majority element.
+///
+/// # Approach
+///
+/// - Uses the **Boyer-Moore Voting Algorithm**, which efficiently finds the majority element in O(n) time.
+/// - Maintains a `candidate` and a `count`.
+/// - If `count` reaches zero, it updates `candidate` to the current element.
+/// - If the current element matches `candidate`, it increments `count`, otherwise it decrements it.
+/// - Since the majority element always exists, `candidate` will hold the correct answer at the end.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n), where `n` is the length of `nums`, since we traverse the array once.
+/// - **Space Complexity:** O(1), as the algorithm uses only two integer variables.
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::array::majority_element;
+///
+/// let nums = vec![3, 2, 3];
+/// assert_eq!(majority_element(nums), 3);
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::array::majority_element;
+///
+/// let nums = vec![2, 2, 1, 1, 1, 2, 2];
+/// assert_eq!(majority_element(nums), 2);
+/// ```
+pub fn majority_element(nums: Vec<i32>) -> i32 {
+    let mut candidate = nums[0];
+    let mut count = 0;
+
+    for num in &nums {
+        if count == 0 {
+            candidate = *num;
+        }
+        if candidate == *num {
+            count += 1;
+        }
+        else {
+            count -= 1;
+        }
+    }
+
+    candidate
+}
