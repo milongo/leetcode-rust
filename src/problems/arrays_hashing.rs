@@ -642,7 +642,7 @@ pub fn longest_palindrome(s: String) -> i32 {
     }
     longest_length
 }
-
+/// LeetCode Problem 169.
 /// Finds the majority element in a vector using the **Boyer-Moore Voting Algorithm**.
 ///
 /// The majority element is the element that appears more than `⌊n / 2⌋` times in the array.
