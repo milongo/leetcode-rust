@@ -572,6 +572,7 @@ pub fn can_construct(ransom_note: String, magazine: String) -> bool {
     }
     true
 }
+
 /// LeetCode problem 409.
 /// Computes the length of the longest palindrome that can be built using the characters in `s`.
 ///
@@ -642,6 +643,7 @@ pub fn longest_palindrome(s: String) -> i32 {
     }
     longest_length
 }
+
 /// LeetCode problem 169.
 /// Finds the majority element in a vector using the **Boyer-Moore Voting Algorithm**.
 ///
@@ -694,8 +696,7 @@ pub fn majority_element(nums: Vec<i32>) -> i32 {
         }
         if candidate == *num {
             count += 1;
-        }
-        else {
+        } else {
             count -= 1;
         }
     }
