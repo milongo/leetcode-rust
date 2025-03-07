@@ -703,3 +703,64 @@ pub fn majority_element(nums: Vec<i32>) -> i32 {
 
     candidate
 }
+
+/// Leetcode problem 70.
+/// Computes the number of distinct ways to climb `n` stairs.
+///
+/// Each time, you can either climb **1 step** or **2 steps**. This function returns
+/// the total number of unique ways to reach the top, following the Fibonacci sequence.
+///
+/// # Arguments
+///
+/// * `n` - The total number of stairs to climb.
+///
+/// # Returns
+///
+/// Returns an `i32` representing the number of distinct ways to climb `n` stairs.
+///
+/// # Approach
+///
+/// This problem follows the **Fibonacci sequence**, where:
+///
+/// ```text
+/// f(n) = f(n-1) + f(n-2)
+/// ```
+///
+/// Instead of using recursion or storing all values in a `Vec`, we optimize by keeping
+/// only the **last two computed values**, reducing space complexity to **O(1)**.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n), since we iterate from `2` to `n`.
+/// - **Space Complexity:** O(1), as we only use two integer variables.
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::dp::climb_stairs;
+///
+/// assert_eq!(climb_stairs(2), 2); // Ways: [1+1], [2]
+/// assert_eq!(climb_stairs(3), 3); // Ways: [1+1+1], [1+2], [2+1]
+/// assert_eq!(climb_stairs(4), 5); // Ways: [1+1+1+1], [1+1+2], [1+2+1], [2+1+1], [2+2]
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::dp::climb_stairs;
+///
+/// assert_eq!(climb_stairs(1), 1); // Only 1 way: [1]
+/// assert_eq!(climb_stairs(5), 8); // Fibonacci property: f(5) = f(4) + f(3)
+/// ```
+pub fn climb_stairs(n: i32) -> i32 {
+    if n <= 1 {
+        return 1;
+    }
+
+    let (mut prev, mut curr) = (1, 1);
+    for _ in 2..=n {
+        let next = prev + curr;
+        prev = curr;
+        curr = next;
+    }
+
+    curr
+}
