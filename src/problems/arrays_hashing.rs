@@ -304,7 +304,7 @@ pub fn is_palindrome(s: String) -> bool {
 /// # Examples
 ///
 /// ```
-/// use leetcode_rust::problems::binary_search::search;
+/// use leetcode_rust::problems::arrays_hashing::search;
 ///
 /// let nums = vec![-1, 0, 3, 5, 9, 12];
 /// let target = 9;
@@ -312,7 +312,7 @@ pub fn is_palindrome(s: String) -> bool {
 /// ```
 ///
 /// ```
-/// use leetcode_rust::problems::binary_search::search;
+/// use leetcode_rust::problems::arrays_hashing::search;
 ///
 /// let nums = vec![-1, 0, 3, 5, 9, 12];
 /// let target = 2;
@@ -320,7 +320,7 @@ pub fn is_palindrome(s: String) -> bool {
 /// ```
 ///
 /// ```
-/// use leetcode_rust::problems::binary_search::search;
+/// use leetcode_rust::problems::arrays_hashing::search;
 ///
 /// let nums = vec![5];
 /// let target = 5;
@@ -456,7 +456,7 @@ pub fn is_valid(s: String) -> bool {
 /// # Examples
 ///
 /// ```
-/// use leetcode_rust::problems::graph::flood_fill;
+/// use leetcode_rust::problems::arrays_hashing::flood_fill;
 ///
 /// let image = vec![
 ///     vec![1, 1, 1],
@@ -674,14 +674,14 @@ pub fn longest_palindrome(s: String) -> i32 {
 /// # Examples
 ///
 /// ```
-/// use leetcode_rust::problems::array::majority_element;
+/// use leetcode_rust::problems::arrays_hashing::majority_element;
 ///
 /// let nums = vec![3, 2, 3];
 /// assert_eq!(majority_element(nums), 3);
 /// ```
 ///
 /// ```
-/// use leetcode_rust::problems::array::majority_element;
+/// use leetcode_rust::problems::arrays_hashing::majority_element;
 ///
 /// let nums = vec![2, 2, 1, 1, 1, 2, 2];
 /// assert_eq!(majority_element(nums), 2);
@@ -704,7 +704,7 @@ pub fn majority_element(nums: Vec<i32>) -> i32 {
     candidate
 }
 
-/// Leetcode problem 70.
+/// LeetCode problem 70.
 /// Computes the number of distinct ways to climb `n` stairs.
 ///
 /// Each time, you can either climb **1 step** or **2 steps**. This function returns
@@ -737,7 +737,7 @@ pub fn majority_element(nums: Vec<i32>) -> i32 {
 /// # Examples
 ///
 /// ```
-/// use leetcode_rust::problems::dp::climb_stairs;
+/// use leetcode_rust::problems::arrays_hashing::climb_stairs;
 ///
 /// assert_eq!(climb_stairs(2), 2); // Ways: [1+1], [2]
 /// assert_eq!(climb_stairs(3), 3); // Ways: [1+1+1], [1+2], [2+1]
@@ -745,7 +745,7 @@ pub fn majority_element(nums: Vec<i32>) -> i32 {
 /// ```
 ///
 /// ```
-/// use leetcode_rust::problems::dp::climb_stairs;
+/// use leetcode_rust::problems::arrays_hashing::climb_stairs;
 ///
 /// assert_eq!(climb_stairs(1), 1); // Only 1 way: [1]
 /// assert_eq!(climb_stairs(5), 8); // Fibonacci property: f(5) = f(4) + f(3)
@@ -763,4 +763,65 @@ pub fn climb_stairs(n: i32) -> i32 {
     }
 
     curr
+}
+
+/// LeetCode problem 53.
+/// Finds the maximum sum of a contiguous subarray in `nums` using Kadane's Algorithm.
+///
+/// This function implements an efficient **O(n)** solution to the **maximum subarray problem**.
+/// Given an array of integers, it finds the contiguous subarray with the largest sum
+/// and returns that sum.
+///
+/// # Arguments
+///
+/// * `nums` - A `Vec<i32>` representing the input array of integers.
+///
+/// # Returns
+///
+/// Returns an `i32` representing the largest sum of any contiguous subarray.
+///
+/// # Approach
+///
+/// - Use a **greedy approach** (Kadane’s Algorithm).
+/// - Maintain `running_sum`, the sum of the current subarray.
+/// - If `running_sum` drops below `nums[i]`, reset it to `nums[i]`, effectively
+///   starting a new subarray.
+/// - Track the maximum sum encountered (`max_sum`).
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n), since we iterate through `nums` once.
+/// - **Space Complexity:** O(1), as we only use two integer variables.
+///
+/// # Examples
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::max_sub_array;
+///
+/// let nums = vec![-2,1,-3,4,-1,2,1,-5,4];
+/// assert_eq!(max_sub_array(nums), 6); // [4, -1, 2, 1] has the maximum sum of 6
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::max_sub_array;
+///
+/// let nums = vec![1];
+/// assert_eq!(max_sub_array(nums), 1); // The only element is the max subarray
+/// ```
+///
+/// ```
+/// use leetcode_rust::problems::arrays_hashing::max_sub_array;
+///
+/// let nums = vec![-1, -2, -3, -4];
+/// assert_eq!(max_sub_array(nums), -1); // Single element subarray [-1] is the max
+/// ```
+pub fn max_sub_array(nums: Vec<i32>) -> i32 {
+    let mut running_sum = nums[0];
+    let mut max_sum = nums[0];
+
+    for i in 1..nums.len() {
+        running_sum = max(nums[i], running_sum + nums[i]);
+        max_sum = max(running_sum, max_sum);
+    }
+    max_sum
 }
