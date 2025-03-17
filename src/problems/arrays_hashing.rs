@@ -825,3 +825,77 @@ pub fn max_sub_array(nums: Vec<i32>) -> i32 {
     }
     max_sum
 }
+
+/// LeetCode problem 57.
+/// Inserts a new interval into a sorted list of non-overlapping intervals and merges if necessary.
+///
+/// This function implements an efficient **O(n)** solution to the "insert interval" problem.
+/// Given a sorted list of non-overlapping intervals and a new interval, it inserts the new interval
+/// into the list, merging any overlapping intervals, and returns the updated list of intervals.
+///
+/// # Arguments
+///
+/// * `intervals` - A `Vec<Vec<i32>>` representing the sorted list of non-overlapping intervals.
+/// * `new_interval` - A `Vec<i32>` representing the interval to be inserted.
+///
+/// # Returns
+///
+/// Returns a `Vec<Vec<i32>>` representing the list of merged intervals after inserting `new_interval`.
+///
+/// # Approach
+///
+/// - **Step 1:** Add all intervals that end before `new_interval` starts.
+/// - **Step 2:** Merge all intervals that overlap with `new_interval` by updating it to cover their union.
+/// - **Step 3:** Add all remaining intervals that start after the merged interval ends.
+///
+/// # Complexity
+///
+/// - **Time Complexity:** O(n), since each interval is processed once.
+/// - **Space Complexity:** O(n), as the resulting intervals are stored in a new vector.
+///
+/// # Examples
+///
+/// ```rust
+/// use leetcode_rust::problems::arrays_hashing::insert;
+///
+/// let intervals = vec![vec![1, 3], vec![6, 9]];
+/// let new_interval = vec![2, 5];
+/// let expected = vec![vec![1, 5], vec![6, 9]];
+/// assert_eq!(insert(intervals, new_interval), expected);
+/// ```
+///
+/// ```rust
+/// use leetcode_rust::problems::arrays_hashing::insert;
+///
+/// let intervals = vec![vec![1, 2], vec![3, 5], vec![6, 7], vec![8, 10], vec![12, 16]];
+/// let new_interval = vec![4, 8];
+/// let expected = vec![vec![1, 2], vec![3, 10], vec![12, 16]];
+/// assert_eq!(insert(intervals, new_interval), expected);
+/// ```
+pub fn insert(intervals: Vec<Vec<i32>>, new_interval: Vec<i32>) -> Vec<Vec<i32>> {
+    let mut new_intervals = Vec::new();
+    let mut i = 0;
+    let n = intervals.len();
+    let mut merge_interval = new_interval.clone();
+
+    while i < n && intervals[i][1] < new_interval[0] {
+        new_intervals.push(intervals[i].clone());
+        i += 1;
+    }
+
+    while i < n && intervals[i][0] <= merge_interval[1] {
+        merge_interval = vec![
+            min(intervals[i][0], merge_interval[0]),
+            max(intervals[i][1], merge_interval[1]),
+        ];
+        i += 1;
+    }
+    new_intervals.push(merge_interval);
+
+    while i < n {
+        new_intervals.push(intervals[i].clone());
+        i += 1;
+    }
+
+    new_intervals
+}
